@@ -7,3 +7,4 @@ vim.g.mapleader = ","
 vim.g.background = "light"
 vim.opt.swapfile = false
 vim.wo.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
