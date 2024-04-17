@@ -23,6 +23,12 @@ return {
         builtin.live_grep,
         {}
       )
+      vim.keymap.set(
+        'n',
+        '<leader>fo',
+        builtin.oldfiles,
+        {}
+      )
     end
   },
   {
