@@ -7,10 +7,10 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.cursorline = true
 vim.opt.breakindent = true
 vim.opt.cmdheight = 0
-vim.opt.completeopt = {"menu", "menuone", "noselect"}
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.copyindent = true
 vim.opt.expandtab = true
-vim.opt.fillchars = {eob = " "}
+vim.opt.fillchars = { eob = " " }
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -36,3 +36,5 @@ vim.opt.wrap = false
 vim.opt.writebackup = false
 vim.opt.softtabstop = 2
 vim.opt.foldmethod = "manual"
+vim.opt.listchars = { eol = "↵", trail = "·", tab = "│·" }
+vim.opt.list = true
