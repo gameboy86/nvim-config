@@ -10,6 +10,8 @@ return {
 			vim.keymap.set("n", "<leader>fw", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
 			vim.keymap.set("n", "<leader>ft", builtin.help_tags, {})
+			vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
+			-- vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<CR>', {})
 		end,
 	},
 	{
