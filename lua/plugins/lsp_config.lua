@@ -42,4 +42,7 @@ return {
 			vim.keymap.set("n", "gy", tb.lsp_type_definitions, {})
 		end,
 	},
+	{
+		"onsails/lspkind.nvim",
+	},
 }

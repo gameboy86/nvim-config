@@ -13,11 +13,16 @@ return {
 		"hrsh7th/nvim-cmp",
 		config = function()
 			local cmp = require("cmp")
+			local lspkind = require("lspkind")
+			local lspkind_options = require("plugins.options.lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load()
 			cmp.setup({
+				formatting = {
+					fields = { "kind", "abbr", "menu" },
+					format = lspkind.cmp_format(lspkind_options),
+				},
 				snippet = {
 					expand = function(args)
-						-- vim.fn["vsnip#anonymous"](args.body)
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
