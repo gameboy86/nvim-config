@@ -10,6 +10,7 @@ vim.opt.cmdheight = 0
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.copyindent = true
 vim.opt.fillchars = { eob = " " }
+vim.o.foldcolumn = "1"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
