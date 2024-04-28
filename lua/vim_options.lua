@@ -33,7 +33,7 @@ vim.opt.virtualedit = "block"
 vim.opt.wrap = false
 vim.opt.writebackup = false
 vim.opt.foldmethod = "manual"
-vim.opt.listchars = { eol = "↵", trail = "·", tab = "│·" }
+vim.opt.listchars = { eol = "↵", trail = "·", tab = "│ " }
 vim.opt.list = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
