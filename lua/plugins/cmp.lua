@@ -11,11 +11,19 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local lspkind_options = require("plugins.options.lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load()
+			local border_opts = {
+				border = "rounded",
+				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+			}
 			cmp.setup({
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
@@ -27,8 +35,8 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered(border_opts),
+					documentation = cmp.config.window.bordered(border_opts),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -41,11 +49,25 @@ return {
 					["<C-k>"] = cmp.mapping.select_prev_item(),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
+					{ name = "nvim_lsp", priority = 1000 },
+					{ name = "luasnip", priority = 750 },
+					{ name = "buffer", priority = 500 },
+					{ name = "path", priority = 250 },
 				}),
+				-- sources = cmp.config.sources({
+				--
+				-- 	{ name = "nvim_lsp" },
+				-- 	{ name = "luasnip" },
+				-- 	{
+				-- 		name = "buffer",
+				-- 		option = {
+				-- 			get_bufnrs = function()
+				-- 				return vim.api.nvim_list_bufs()
+				-- 			end,
+				-- 		},
+				-- 	},
+				-- 	{ name = "path" },
+				-- }, {}),
 			})
 		end,
 	},
