@@ -1,43 +1,89 @@
 return {
-  -- {
-  --   "neanias/everforest-nvim",
-  --   config = function()
-  --     vim.cmd.colorscheme("everforest")
-  --   end,
-  -- },
-  {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      vim.cmd.colorscheme("nightfox")
-    end,
-  },
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme("catppuccin")
-  --   end,
-  -- },
-  -- {
-  --   "rebelot/kanagawa.nvim",
-  --   config = function()
-  --     vim.cmd.colorscheme("kanagawa-dragon")
-  --   end,
-  -- },
-  -- {
-  --   "rose-pine/neovim",
-  --   config = function()
-  --     vim.cmd.colorscheme("rose-pine-moon")
-  --   end,
-  -- },
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   config = function()
-  --     require("onedark").setup({
-  --       style = "darker",
-  --     })
-  --     vim.cmd.colorscheme("onedark")
-  --   end,
-  -- },
+	-- {
+	-- 	"neanias/everforest-nvim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("everforest")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"EdenEast/nightfox.nvim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("nightfox")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		--  catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+	-- 		vim.cmd.colorscheme("catppuccin-mocha")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	config = function()
+	-- 		-- vim.cmd.colorscheme("kanagawa-wave")
+	-- 		vim.cmd.colorscheme("kanagawa-lotus")
+	-- 	end,
+	-- },
+	{
+		"rose-pine/neovim",
+		config = function()
+			vim.cmd.colorscheme("rose-pine-moon")
+		end,
+	},
+	-- {
+	--   "navarasu/onedark.nvim",
+	--   config = function()
+	--     require("onedark").setup({
+	--       style = "darker",
+	--     })
+	--     vim.cmd.colorscheme("onedark")
+	--   end,
+	-- },
+	--
+	-- {
+	-- 	"mhartington/oceanic-next",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("OceanicNext")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"alexmozaidze/palenight.nvim",
+	-- 	config = function()
+	-- 		vim.opt.background = "dark"
+	-- 		vim.cmd.colorscheme("palenight")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"olivercederborg/poimandres.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("poimandres").setup({
+	-- 			-- leave this setup function empty for default config
+	-- 			-- or refer to the configuration section
+	-- 			-- for configuration options
+	-- 		})
+	-- 	end,
+	-- 	init = function()
+	-- 		vim.cmd("colorscheme poimandres")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		-- colorscheme tokyonight-night
+	-- 		-- colorscheme tokyonight-storm
+	-- 		-- colorscheme tokyonight-day
+	-- 		-- colorscheme tokyonight-moon
+	-- 		-- vim.cmd("colorscheme tokyonight-night")
+	-- 		-- vim.cmd("colorscheme tokyonight-storm")
+	-- 		vim.cmd("colorscheme tokyonight-moon")
+	-- 	end,
+	-- },
 }
