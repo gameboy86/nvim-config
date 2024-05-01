@@ -14,6 +14,7 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"rcarriga/cmp-dap",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -25,6 +26,9 @@ return {
 				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 			}
 			cmp.setup({
+				enabled = function()
+					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+				end,
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format(lspkind_options),
@@ -54,20 +58,11 @@ return {
 					{ name = "buffer", priority = 500 },
 					{ name = "path", priority = 250 },
 				}),
-				-- sources = cmp.config.sources({
-				--
-				-- 	{ name = "nvim_lsp" },
-				-- 	{ name = "luasnip" },
-				-- 	{
-				-- 		name = "buffer",
-				-- 		option = {
-				-- 			get_bufnrs = function()
-				-- 				return vim.api.nvim_list_bufs()
-				-- 			end,
-				-- 		},
-				-- 	},
-				-- 	{ name = "path" },
-				-- }, {}),
+			})
+			require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+				sources = {
+					{ name = "dap" },
+				},
 			})
 		end,
 	},
