@@ -28,6 +28,18 @@ return {
 			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
 			vim.keymap.set("n", "<leader>ft", builtin.help_tags, {})
 			vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
+			vim.keymap.set("n", "<leader>gb", function()
+				builtin.git_branches({ use_file_path = true })
+			end, {})
+			vim.keymap.set("n", "<leader>gc", function()
+				builtin.git_commits({ use_file_path = true })
+			end, {})
+			vim.keymap.set("n", "<leader>gC", function()
+				builtin.git_bcommits({ use_file_path = true })
+			end, {})
+			vim.keymap.set("n", "<leader>ga", function()
+				builtin.git_status({ use_file_path = true })
+			end, {})
 		end,
 	},
 	{
