@@ -25,18 +25,20 @@ return {
 				border = "rounded",
 				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 			}
+			local enable_f = function()
+				return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+			end
+			local snippet_expand = function(args)
+				require("luasnip").lsp_expand(args.body)
+			end
 			cmp.setup({
-				enabled = function()
-					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
-				end,
+				enabled = enable_f,
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format(lspkind_options),
 				},
 				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
+					expand = snippet_expand,
 				},
 				window = {
 					completion = cmp.config.window.bordered(border_opts),
@@ -54,12 +56,16 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = 1000 },
-					{ name = "luasnip", priority = 750 },
-					{ name = "buffer", priority = 500 },
-					{ name = "path", priority = 250 },
+					{ name = "luasnip",  priority = 750 },
+					{ name = "buffer",   priority = 500 },
+					{ name = "path",     priority = 250 },
 				}),
 			})
-			require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+			require("cmp").setup.filetype({
+				"dap-repl",
+				"dapui_watches",
+				"dapui_hover",
+			}, {
 				sources = {
 					{ name = "dap" },
 				},
