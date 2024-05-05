@@ -90,12 +90,5 @@ return {
 			"DapStopped",
 			{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
 		)
-
-		vim.keymap.set("n", "<Leader>dt", ":DapToggleBreakpoint<CR>")
-		vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>")
-		vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
-		vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
-		vim.keymap.set("n", "<Leader>du", dapui.toggle)
-		vim.keymap.set("v", "<Leader>de", dapui.eval)
 	end,
 }

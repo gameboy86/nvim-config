@@ -19,9 +19,9 @@ return {
 				winbar = true,
 				content_layout = "center",
 				sources = {
-					{ source = "filesystem", display_name = "File" },
-					{ source = "buffers", display_name = "Bufs" },
-					{ source = "git_status", display_name = "Git" },
+					{ source = "filesystem",  display_name = "File" },
+					{ source = "buffers",     display_name = "Bufs" },
+					{ source = "git_status",  display_name = "Git" },
 					{ source = "diagnostics", display_name = "Diagnostic" },
 				},
 			},
@@ -30,34 +30,6 @@ return {
 				hijack_netrw_behavior = "open_current",
 				use_libuv_file_watcher = vim.fn.has("win32") ~= 1,
 			},
-			-- default_component_configs = {
-			-- 	indent = { padding = 0 },
-			-- 	icon = {
-			-- 		default = "",
-			-- 		symlink = "",
-			-- 		folder = {
-			-- 			arrow_open = "",
-			-- 			arrow_closed = "",
-			-- 			default = "",
-			-- 			open = "",
-			-- 			empty = "",
-			-- 			empty_open = "",
-			-- 			symlink = "",
-			-- 			symlink_open = "",
-			-- 		},
-			-- 		git_status = {
-			-- 			symbols = {
-			-- 				unstaged = "",
-			-- 				staged = "S",
-			-- 				unmerged = "",
-			-- 				renamed = "➜",
-			-- 				untracked = "U",
-			-- 				deleted = "",
-			-- 				ignored = "◌",
-			-- 			},
-			-- 		},
-			-- 	},
-			-- },
 			commands = {
 				system_open = function(state)
 					-- TODO: just use vim.ui.open when dropping support for Neovim <0.10
@@ -76,7 +48,7 @@ return {
 					if node.type == "directory" or node:has_children() then
 						if not node:is_expanded() then -- if unexpanded, expand
 							state.commands.toggle_node(state)
-						else -- if expanded and has children, seleect the next child
+						else         -- if expanded and has children, seleect the next child
 							require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
 						end
 					else -- if not a directory just open it
@@ -154,14 +126,5 @@ return {
 				},
 			},
 		})
-		local f = function()
-			if vim.bo.filetype == "neo-tree" then
-				vim.cmd.wincmd("p")
-			else
-				vim.cmd.Neotree("focus")
-			end
-		end
-		vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", {})
-		vim.keymap.set("n", "<leader>o", f, {})
 	end,
 }
