@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "pyright" },
+				ensure_installed = { "lua_ls", "gopls", "pyright", "jsonls" },
 			})
 		end,
 	},
@@ -19,8 +19,6 @@ return {
 			local tb = require("telescope.builtin")
 			local capa = require("cmp_nvim_lsp").default_capabilities()
 
-			local navic = require("nvim-navic")
-
 			capa.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
@@ -28,24 +26,16 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
 				capabilities = capa,
-
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
 			})
 			lspconfig.gopls.setup({
 				capabilities = capa,
-
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
 			})
 			lspconfig.pyright.setup({
 				capabilities = capa,
-
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
+			})
+			lspconfig.jsonls.setup({
+				capabilities = capa,
+				provideFormatter = true,
 			})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {})
