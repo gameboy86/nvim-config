@@ -6,9 +6,37 @@ return {
 	-- 	end,
 	-- },
 	-- {
+	-- 	"Mofiqul/dracula.nvim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("dracula")
+	-- 	end,
+	-- },
+	-- {
 	-- 	"EdenEast/nightfox.nvim",
 	-- 	config = function()
-	-- 		vim.cmd.colorscheme("nightfox")
+	-- 		vim.cmd.colorscheme("carbonfox")
+	-- 		-- vim.cmd.colorscheme("dayfox")
+	-- 		-- vim.cmd.colorscheme("dawnfox")
+	-- 	end,
+	-- },
+	{
+		"AlexvZyl/nordic.nvim",
+		priority = 1000,
+		config = function()
+			require("nordic").load()
+			vim.cmd.colorscheme("nordic")
+		end,
+	},
+	-- {
+	-- 	"shaunsingh/nord.nvim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("nord")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"EdenEast/nightfox.nvim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("nordfox")
 	-- 	end,
 	-- },
 	-- {
@@ -27,12 +55,12 @@ return {
 	-- 		vim.cmd.colorscheme("kanagawa-lotus")
 	-- 	end,
 	-- },
-	{
-		"rose-pine/neovim",
-		config = function()
-			vim.cmd.colorscheme("rose-pine-moon")
-		end,
-	},
+	-- {
+	-- 	"rose-pine/neovim",
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("rose-pine-moon")
+	-- 	end,
+	-- },
 	-- {
 	--   "navarasu/onedark.nvim",
 	--   config = function()
