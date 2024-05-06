@@ -1,5 +1,9 @@
 return {
 	{
+		"folke/neodev.nvim",
+		opts = {},
+	},
+	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
@@ -16,7 +20,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			-- local tb = require("telescope.builtin")
+			require("neodev").setup({})
 			local capa = require("cmp_nvim_lsp").default_capabilities()
 
 			capa.textDocument.foldingRange = {
@@ -26,6 +30,13 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
 				capabilities = capa,
+				settings = {
+					Lua = {
+						completion = {
+							callSnippet = "Replace",
+						},
+					},
+				},
 			})
 			lspconfig.gopls.setup({
 				capabilities = capa,
