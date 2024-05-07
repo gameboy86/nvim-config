@@ -20,7 +20,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("neodev").setup({})
+			require("neodev").setup({
+				library = { plugins = { "neotest" }, types = true },
+			})
 			local capa = require("cmp_nvim_lsp").default_capabilities()
 
 			capa.textDocument.foldingRange = {
