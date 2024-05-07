@@ -19,12 +19,23 @@ return {
 	-- 		-- vim.cmd.colorscheme("dawnfox")
 	-- 	end,
 	-- },
+	-- {
+	-- 	"AlexvZyl/nordic.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("nordic").load()
+	-- 		vim.cmd.colorscheme("nordic")
+	-- 	end,
+	-- },
 	{
-		"AlexvZyl/nordic.nvim",
+		"sam4llis/nvim-tundra",
 		priority = 1000,
 		config = function()
-			require("nordic").load()
-			vim.cmd.colorscheme("nordic")
+			vim.g.tundra_biome = "arctic" -- 'arctic' or 'jungle'
+			vim.opt.background = "dark"
+			vim.cmd("colorscheme tundra")
+			-- require("nordic").load()
+			-- vim.cmd.colorscheme("nordic")
 		end,
 	},
 	-- {
