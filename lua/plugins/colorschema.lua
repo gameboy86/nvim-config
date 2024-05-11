@@ -27,17 +27,17 @@ return {
 	-- 		vim.cmd.colorscheme("nordic")
 	-- 	end,
 	-- },
-	{
-		"sam4llis/nvim-tundra",
-		priority = 1000,
-		config = function()
-			vim.g.tundra_biome = "arctic" -- 'arctic' or 'jungle'
-			vim.opt.background = "dark"
-			vim.cmd("colorscheme tundra")
-			-- require("nordic").load()
-			-- vim.cmd.colorscheme("nordic")
-		end,
-	},
+	-- {
+	-- 	"sam4llis/nvim-tundra",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.tundra_biome = "arctic" -- 'arctic' or 'jungle'
+	-- 		vim.opt.background = "dark"
+	-- 		vim.cmd("colorscheme tundra")
+	-- 		-- require("nordic").load()
+	-- 		-- vim.cmd.colorscheme("nordic")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"shaunsingh/nord.nvim",
 	-- 	config = function()
@@ -50,15 +50,15 @@ return {
 	-- 		vim.cmd.colorscheme("nordfox")
 	-- 	end,
 	-- },
-	-- {
-	-- 	"catppuccin/nvim",
-	-- 	name = "catppuccin",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		--  catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-	-- 		vim.cmd.colorscheme("catppuccin-mocha")
-	-- 	end,
-	-- },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			--  catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end,
+	},
 	-- {
 	-- 	"rebelot/kanagawa.nvim",
 	-- 	config = function()
