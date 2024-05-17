@@ -50,15 +50,15 @@ return {
 	-- 		vim.cmd.colorscheme("nordfox")
 	-- 	end,
 	-- },
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			--  catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-			vim.cmd.colorscheme("catppuccin-mocha")
-		end,
-	},
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		--  catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+	-- 		vim.cmd.colorscheme("catppuccin-mocha")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"rebelot/kanagawa.nvim",
 	-- 	config = function()
@@ -110,19 +110,19 @@ return {
 	-- 		vim.cmd("colorscheme poimandres")
 	-- 	end,
 	-- },
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {},
-	-- 	config = function()
-	-- 		-- colorscheme tokyonight-night
-	-- 		-- colorscheme tokyonight-storm
-	-- 		-- colorscheme tokyonight-day
-	-- 		-- colorscheme tokyonight-moon
-	-- 		-- vim.cmd("colorscheme tokyonight-night")
-	-- 		-- vim.cmd("colorscheme tokyonight-storm")
-	-- 		vim.cmd("colorscheme tokyonight-moon")
-	-- 	end,
-	-- },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+		config = function()
+			-- colorscheme tokyonight-night
+			-- colorscheme tokyonight-storm
+			-- colorscheme tokyonight-day
+			-- colorscheme tokyonight-moon
+			-- vim.cmd("colorscheme tokyonight-night")
+			-- vim.cmd("colorscheme tokyonight-storm")
+			vim.cmd("colorscheme tokyonight-night")
+		end,
+	},
 }
