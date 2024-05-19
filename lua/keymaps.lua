@@ -5,6 +5,8 @@ vim.keymap.set("n", "a<CR>", "i<CR><ESC>", {})
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", {})
 vim.keymap.set("n", "<space>", "za", {})
+vim.keymap.set("n", "<leader>c", ":bd<CR>", {})
+vim.keymap.set("n", "<leader>C", ":bd!<CR>", {})
 
 local lsp_open_diagnostic = function()
 	vim.diagnostic.open_float()
