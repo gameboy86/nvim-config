@@ -19,16 +19,25 @@ return {
 						},
 						n = { q = actions.close },
 					},
+					file_ignore_patterns = { "node_modules", ".git", ".venv", "dist/" },
 				},
 				pickers = {
 					live_grep = {
-						file_ignore_patterns = { "node_modules", ".git", ".venv" },
 						additional_args = function(_)
 							return { "--hidden" }
 						end,
 					},
 					find_files = {
 						hidden = true,
+					},
+					buffers = {
+						previewer = false,
+						layout_config = {
+							width = 80,
+						},
+					},
+					lsp_references = {
+						previewer = true,
 					},
 				},
 			})

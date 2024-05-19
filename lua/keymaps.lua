@@ -13,6 +13,7 @@ end
 local wk = require("which-key")
 local tb = require("telescope.builtin")
 local gits = require("gitsigns")
+local utils = require("./utils")
 
 wk.register({
 	["<C-Up>"] = { require("smart-splits").resize_up(), "Resize split up" },
@@ -28,49 +29,6 @@ wk.register({
 })
 
 wk.register({
-	-- ["<leader>t"] = { require("whitespace-nvim").trim, "Remove trailing whitespace" },
-	-- ["<leader>t"] = { "neotest" },
-	-- ["<leader>tr"] = {
-	-- 	require("neotest").run.run,
-	-- 	"Run the nearest test",
-	-- },
-	-- ["<leader>tR"] = {
-	-- 	function()
-	-- 		require("neotest").run.run(vim.fn.expand("%"))
-	-- 	end,
-	-- 	"Run the current file",
-	-- },
-	-- ["<leader>td"] = {
-	-- 	function()
-	-- 		require("neotest").run.run({ strategy = "dap" })
-	-- 	end,
-	-- 	"Debug nearest test",
-	-- },
-	-- ["<leader>ta"] = {
-	-- 	function()
-	-- 		require("neotest").run.attach()
-	-- 	end,
-	-- 	"Attach to the nearest test",
-	-- },
-	-- ["<leader>ts"] = {
-	-- 	function()
-	-- 		require("neotest").run.stop()
-	-- 	end,
-	-- 	"Stop test",
-	-- },
-	-- ["<leader>tw"] = {
-	-- 	function()
-	-- 		require("neotest").watch.toggle()
-	-- 	end,
-	-- 	"Watch test",
-	-- },
-	-- ["<leader>tS"] = {
-	-- 	function()
-	-- 		require("neotest").summary.toggle(vim.fn.expand("%"))
-	-- 	end,
-	-- 	"Summary test",
-	-- },
-
 	["<leader>tt"] = {
 		function()
 			require("neotest").run.run(vim.fn.expand("%"))
@@ -173,6 +131,16 @@ wk.register({
 	["<leader>gb"] = { git_branches, "List Git branches" },
 })
 
+local telescope_live_grep_visual_selected = function()
+	local text = utils.functions.getVisualSelection()
+	tb.live_grep({ default_text = text })
+end
+
+local telescope_find_files_visual_selected = function()
+	local text = utils.functions.getVisualSelection()
+	tb.find_files({ default_text = text })
+end
+
 wk.register({
 	["<leader>f"] = { name = "telescope" },
 	["<leader>ff"] = { tb.find_files, "Find files" },
@@ -183,6 +151,10 @@ wk.register({
 	["<leader>fe"] = { tb.diagnostics, "Toggle diagnostics" },
 	["<leader>fd"] = { ":TodoTelescope<CR>", "TODO list" },
 })
+
+-- TODO: how to override v-mode using witch-key ?
+vim.keymap.set("v", "<leader>fw", telescope_live_grep_visual_selected)
+vim.keymap.set("v", "<leader>ff", telescope_find_files_visual_selected)
 
 wk.register({
 	["<leader>e"] = { "<cmd>Neotree toggle<cr>", "Toggle Explorer" },
