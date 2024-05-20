@@ -6,19 +6,11 @@ return {
 			gits.setup()
 		end,
 	},
-	-- {
-	-- 	"tpope/vim-fugitive",
-	-- 	config=function ()
-	-- 		vim.keymap.set("n", "<leader>hr", , {})
-	-- 	end
-	-- },
-	-- {
-	-- 	"NeogitOrg/neogit",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"sindrets/diffview.nvim",
-	-- 		"nvim-telescope/telescope.nvim",
-	-- 	},
-	-- 	config = true,
-	-- },
+	{
+		"radyz/telescope-gitsigns",
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
 }

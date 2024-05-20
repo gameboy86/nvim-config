@@ -41,6 +41,7 @@ return {
 					},
 				},
 			})
+			require("telescope").load_extension("git_signs")
 		end,
 	},
 	{

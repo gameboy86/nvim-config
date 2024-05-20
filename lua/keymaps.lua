@@ -152,6 +152,7 @@ wk.register({
 	["<leader>ft"] = { tb.help_tags, "Find help" },
 	["<leader>fe"] = { tb.diagnostics, "Toggle diagnostics" },
 	["<leader>fd"] = { ":TodoTelescope<CR>", "TODO list" },
+	["<leader>fg"] = { ":Telescope git_signs<CR>", "List git hunks" },
 })
 
 -- TODO: how to override v-mode using witch-key ?
