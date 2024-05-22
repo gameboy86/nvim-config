@@ -39,6 +39,9 @@ return {
 					lsp_references = {
 						previewer = true,
 					},
+					git_signs = {
+						previewer = true,
+					},
 				},
 			})
 			require("telescope").load_extension("git_signs")
