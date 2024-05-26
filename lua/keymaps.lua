@@ -190,3 +190,18 @@ wk.register({
 	["<leader>du"] = { dapui.toggle, "Toggle UI" },
 	["<leader>de"] = { dapui.eval, "Eval" },
 })
+
+local function visual_cursor_with_delay()
+	vim.cmd('silent! execute "normal! \\<Plug>(VM-Visual-Cursors)"')
+	vim.cmd("sleep 200m")
+	vim.cmd('silent! execute "normal! A"')
+end
+
+wk.register({
+	["<leader>m"] = { name = "Visual Multi" },
+	["<leader>ma"] = { "<Plug>(VM-Select-All)<Tab>", "Select All" },
+	["<leader>mr"] = { "<Plug>(VM-Start-Regex-Search)", "Regex Search" },
+	["<leader>mp"] = { "<Plug>(VM-Add-Cursor-At-Pos)", "Add Cursor At Pos" },
+	["<leader>mv"] = { visual_cursor_with_delay, "Visual Cursor", mode = { "v" } },
+	["<leader>mo"] = { "<Plug>(VM-Toggle-Mappings)", "Toggle Mapping" },
+})
