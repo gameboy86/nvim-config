@@ -8,6 +8,16 @@ vim.keymap.set("n", "<space>", "za", {})
 vim.keymap.set("n", "<leader>c", ":bd<CR>", {})
 vim.keymap.set("n", "<leader>C", ":bd!<CR>", {})
 
+-- Copy file paths
+vim.keymap.set("n", "<leader>cf", '<cmd>let @+ = expand("%")<CR>', {})
+vim.keymap.set("n", "<leader>cp", '<cmd>let @+ = expand("%:p")<CR>', {})
+
+-- Resize with arrows
+vim.keymap.set("n", "<C-S-Down>", ":resize +2<CR>", {})
+vim.keymap.set("n", "<C-S-Up>", ":resize -2<CR>", {})
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", {})
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", {})
+
 local lsp_open_diagnostic = function()
 	vim.diagnostic.open_float()
 end
