@@ -5,7 +5,7 @@ vim.keymap.set("n", "a<CR>", "i<CR><ESC>", {})
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", {})
 vim.keymap.set("n", "<space>", "za", {})
-vim.keymap.set("n", "<leader>c", ":bd<CR>", {})
+vim.keymap.set("n", "<leader>c", ":b#|bd#<CR>", {})
 vim.keymap.set("n", "<leader>C", ":bd!<CR>", {})
 -- vim.keymap.set("n", "<S-C-J>", "<c-e>") -- scroll one line up
 -- vim.keymap.set("n", "<S-C-K>", "<c-y>") -- scroll one line down
@@ -202,4 +202,5 @@ wk.register({
 	["<leader>de"] = { dapui.eval, "Eval" },
 })
 
+vim.keymap.set("n", "<leader>oo", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
