@@ -7,7 +7,8 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", {})
 vim.keymap.set("n", "<space>", "za", {})
 vim.keymap.set("n", "<leader>c", ":bd<CR>", {})
 vim.keymap.set("n", "<leader>C", ":bd!<CR>", {})
-
+-- vim.keymap.set("n", "<S-C-J>", "<c-e>") -- scroll one line up
+-- vim.keymap.set("n", "<S-C-K>", "<c-y>") -- scroll one line down
 -- Copy file paths
 vim.keymap.set("n", "<leader>cf", '<cmd>let @+ = expand("%")<CR>', {})
 vim.keymap.set("n", "<leader>cp", '<cmd>let @+ = expand("%:p")<CR>', {})
