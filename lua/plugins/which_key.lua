@@ -6,6 +6,9 @@ return {
 		vim.o.timeoutlen = 500
 	end,
 	opts = {
-		ignore_missing = true,
+		filter = function(key_binding)
+			-- Przykład: Ignoruj klucze, które są puste lub mają wartość nil
+			return key_binding ~= nil and key_binding ~= ""
+		end,
 	},
 }

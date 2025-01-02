@@ -1,3 +1,40 @@
+local handlers = {
+	["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+		local diagnostic = require("plugins/options/diagnostic")
+		diagnostic.MyDiagnosticConfig(ctx.bufnr)
+		vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+	end,
+
+}
+
+local setLSPClients = function(capa)
+	local lspconfig = require("lspconfig")
+	lspconfig.lua_ls.setup({
+		capabilities = capa,
+		handlers = handlers,
+		settings = {
+			Lua = {
+				completion = {
+					callSnippet = "Replace",
+				},
+			},
+		},
+	})
+	lspconfig.gopls.setup({
+		capabilities = capa,
+		handlers = handlers,
+	})
+	lspconfig.pyright.setup({
+		capabilities = capa,
+		handlers = handlers,
+	})
+	lspconfig.jsonls.setup({
+		capabilities = capa,
+		provideFormatter = true,
+		handlers = handlers,
+	})
+end
+
 return {
 	{
 		"folke/neodev.nvim",
@@ -24,32 +61,12 @@ return {
 				library = { plugins = { "neotest" }, types = true },
 			})
 			local capa = require("cmp_nvim_lsp").default_capabilities()
-
+			capa.offset_encoding = "utf-16"
 			capa.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities = capa,
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = "Replace",
-						},
-					},
-				},
-			})
-			lspconfig.gopls.setup({
-				capabilities = capa,
-			})
-			lspconfig.pyright.setup({
-				capabilities = capa,
-			})
-			lspconfig.jsonls.setup({
-				capabilities = capa,
-				provideFormatter = true,
-			})
+			setLSPClients(capa)
 		end,
 	},
 	{

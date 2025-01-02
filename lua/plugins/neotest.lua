@@ -22,6 +22,11 @@ return {
 				}),
 				require("neotest-go"),
 			},
+			log_level = 3,
+			diagnostic = {
+				enabled = true,
+				severity = 1
+			}
 		})
 	end,
 }

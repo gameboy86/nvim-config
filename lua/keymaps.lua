@@ -7,8 +7,8 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", {})
 vim.keymap.set("n", "<space>", "za", {})
 vim.keymap.set("n", "<leader>c", ":b#|bd#<CR>", {})
 vim.keymap.set("n", "<leader>C", ":bd!<CR>", {})
--- vim.keymap.set("n", "<S-C-J>", "<c-e>") -- scroll one line up
--- vim.keymap.set("n", "<S-C-K>", "<c-y>") -- scroll one line down
+-- vim.keymap.set("n", "<C-J>", "<c-e>") -- scroll one line up
+-- vim.keymap.set("n", "<C-K>", "<c-y>") -- scroll one line down
 -- Copy file paths
 vim.keymap.set("n", "<leader>cf", '<cmd>let @+ = expand("%")<CR>', {})
 vim.keymap.set("n", "<leader>cp", '<cmd>let @+ = expand("%:p")<CR>', {})
@@ -27,68 +27,63 @@ local wk = require("which-key")
 local tb = require("telescope.builtin")
 local gits = require("gitsigns")
 local utils = require("./utils")
+local ssplit = require("smart-splits")
+local neotest = require("neotest")
 
-wk.register({
-	["<C-Up>"] = { require("smart-splits").resize_up(), "Resize split up" },
-	["<C-Down>"] = { require("smart-splits").resize_down(), "Resize split down" },
-	["<C-Left>"] = { require("smart-splits").resize_left(), "Resize split left" },
-	["<C-Right>"] = { require("smart-splits").resize_right(), "Resize split right" },
+vim.keymap.set("n", "<leader>v", ":<C-u>vsplit<CR>", {})
+vim.keymap.set("n", "<leader><space>", ":noh<cr>", {})
+vim.keymap.set("n", "<leader>h", ":<C-u>split<CR>", {})
+
+wk.add({
+	{ "<C-Up>",    ssplit.resize_up(),    desc = "Resize split up" },
+	{ "<C-Down>",  ssplit.resize_down(),  desc = "Resize split down" },
+	{ "<C-Left>",  ssplit.resize_left(),  desc = "Resize split left" },
+	{ "<C-Right>", ssplit.resize_right(), desc = "Resize split right" },
 })
 
-wk.register({
-	["<leader><space>"] = { ":noh<CR>", "Clear last search highlighting" },
-	["<leader>v"] = { ":<C-u>vsplit<CR>", "Split window verical" },
-	["<leader>h"] = { ":<C-u>split<CR>", "Split window horizontal" },
-})
+local neotest_tt = function()
+	neotest.run.run(vim.fn.expand("%"))
+end
+local neotest_tr = function()
+	neotest.run.run()
+end
+local neotest_tT = function()
+	neotest.run.run(vim.loop.cwd())
+end
+local neotest_ts = function()
+	neotest.summary.toggle()
+end
+local neotest_to = function()
+	neotest.output.open({ enter = true, auto_close = true })
+end
+local neotest_tO = function()
+	neotest.output_panel.toggle()
+end
+local neotest_tS = function()
+	neotest.run.stop()
+end
 
-wk.register({
-	["<leader>tt"] = {
-		function()
-			require("neotest").run.run(vim.fn.expand("%"))
-		end,
-		"Run File",
-	},
-	["<leader>tT"] = {
-		function()
-			require("neotest").run.run(vim.loop.cwd())
-		end,
-		"Run All Test Files",
-	},
-	["<leader>tr"] = {
-		function()
-			require("neotest").run.run()
-		end,
-		"Run Nearest",
-	},
-	["<leader>ts"] = {
-		function()
-			require("neotest").summary.toggle()
-		end,
-		"Toggle Summary",
-	},
-	["<leader>to"] = {
-		function()
-			require("neotest").output.open({ enter = true, auto_close = true })
-		end,
-		"Show Output",
-	},
-	["<leader>tO"] = {
-		function()
-			require("neotest").output_panel.toggle()
-		end,
-		"Toggle Output Panel",
-	},
-	["<leader>tS"] = {
-		function()
-			require("neotest").run.stop()
-		end,
-		"Stop",
-	},
+wk.add({
+	{ "<leader>tt", neotest_tt, desc = "Run File" },
+	{ "<leader>tr", neotest_tr, desc = "Run Nearest" },
+	{ "<leader>tT", neotest_tT, desc = "Run Nearest" },
+	{ "<leader>ts", neotest_ts, desc = "Toggle Summary" },
+	{ "<leader>to", neotest_to, desc = "Show Output" },
+	{ "<leader>tO", neotest_tO, desc = "Toggle Output Panel" },
+	{ "<leader>tS", neotest_tS, desc = "Stop" },
 })
 
 wk.register({
 	["<leader>x"] = { "trouble" },
 	["<leader>xx"] = { require("trouble").toggle, "Toggle trouble" },
+})
+
+-- LSP
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+  callback = function ()
+    vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+  end
 })
 
 wk.register({
@@ -104,7 +99,7 @@ wk.register({
 	["<leader>li"] = { tb.lsp_implementations, "Goto implementations" },
 	["<leader>ly"] = { tb.lsp_type_definitions, "List type definitions" },
 })
-
+-- END LSP
 local git_branches = function()
 	tb.git_branches({ use_file_path = true })
 end

@@ -18,15 +18,15 @@ return {
 				null_ls.builtins.diagnostics.golangci_lint,
 			},
 			on_attach = function(client, bufnr)
-				if client.supports_method("textDocument/formatting") then
+				local format = function ()
+					vim.lsp.buf.format({async = false})
+				end
+				if client.supports_method("textDocument/formatting") and vim.bo.filetype ~= "json" then
 					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						group = augroup,
 						buffer = bufnr,
-						callback = function()
-							-- vim.lsp.buf.formatting_sync()
-							vim.lsp.buf.format({ async = false })
-						end,
+						callback = format,
 					})
 				end
 			end,

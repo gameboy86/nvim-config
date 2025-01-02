@@ -1,7 +1,7 @@
 return {
 	symbol_map = {
 		Array = "{}",
-		Boolean = "⊨",
+		Boolean = "󰀿",
 		Class = "󰌗",
 		Constructor = "",
 		Key = "󰌆",
