@@ -3,8 +3,7 @@ local handlers = {
 		local diagnostic = require("plugins/options/diagnostic")
 		diagnostic.MyDiagnosticConfig(ctx.bufnr)
 		vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-	end,
-
+	end
 }
 
 local setLSPClients = function(capa)
@@ -23,6 +22,14 @@ local setLSPClients = function(capa)
 	lspconfig.gopls.setup({
 		capabilities = capa,
 		handlers = handlers,
+		on_attach = function()
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+				callback = function()
+					vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+				end
+			})
+		end
 	})
 	lspconfig.pyright.setup({
 		capabilities = capa,
