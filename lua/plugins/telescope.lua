@@ -45,6 +45,7 @@ return {
 				},
 			})
 			require("telescope").load_extension("git_signs")
+			require("telescope").load_extension("noice")
 		end,
 	},
 	{

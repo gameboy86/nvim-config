@@ -188,3 +188,7 @@ wk.register({
 	["<leader>du"] = { dapui.toggle, "Toggle UI" },
 	["<leader>de"] = { dapui.eval, "Eval" },
 })
+
+wk.add({
+	{ "<leader>nd", "<cmd>NoiceDismiss<CR>", desc = "Dissmiss noice messages" },
+})
