@@ -29,7 +29,16 @@ return {
 					return client == "null-ls"
 				end,
 			},
+
 			opts = { skip = true },
 		},
+		{
+			filter = {
+				event = 'msg_show',
+				kind = '',
+				find = 'more line',
+			},
+			opts = { skip = true },
+		}
 	},
 }
