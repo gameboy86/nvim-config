@@ -188,6 +188,3 @@ wk.register({
 	["<leader>du"] = { dapui.toggle, "Toggle UI" },
 	["<leader>de"] = { dapui.eval, "Eval" },
 })
-
-vim.keymap.set("n", "<leader>oo", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
-vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
