@@ -191,4 +191,5 @@ wk.register({
 
 wk.add({
 	{ "<leader>nd", "<cmd>NoiceDismiss<CR>", desc = "Dissmiss noice messages" },
+	{ "<leader>z",  "<cmd>ZenMode<CR>",      desc = "ZenMode" },
 })
