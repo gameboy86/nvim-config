@@ -14,6 +14,7 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
 			"rcarriga/cmp-dap",
 		},
 		config = function()
@@ -31,6 +32,18 @@ return {
 			local snippet_expand = function(args)
 				require("luasnip").lsp_expand(args.body)
 			end
+			cmp.setup.cmdline('/', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
+			cmp.setup.cmdline('/', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
 			cmp.setup({
 				enabled = enable_f,
 				formatting = {
@@ -59,6 +72,7 @@ return {
 					{ name = "luasnip",  priority = 750 },
 					{ name = "buffer",   priority = 500 },
 					{ name = "path",     priority = 250 },
+					{ name = "cmdline",     priority = 150 },
 				}),
 			})
 			require("cmp").setup.filetype({
