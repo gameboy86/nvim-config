@@ -38,12 +38,6 @@ return {
 					{ name = 'buffer' }
 				}
 			})
-			cmp.setup.cmdline('/', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = 'buffer' }
-				}
-			})
 			cmp.setup({
 				enabled = enable_f,
 				formatting = {
@@ -68,11 +62,12 @@ return {
 					["<C-k>"] = cmp.mapping.select_prev_item(),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp", priority = 1000 },
+					{ name = "cmdline",  priority = 150 },
+					{ name = "nvim_lsp", priority = 500 },
 					{ name = "luasnip",  priority = 750 },
-					{ name = "buffer",   priority = 500 },
-					{ name = "path",     priority = 250 },
-					{ name = "cmdline",     priority = 150 },
+					{ name = "render-markdown"},
+					{ name = "buffer",   priority = 1000 },
+					{ name = "path",     priority = 1100 },
 				}),
 			})
 			require("cmp").setup.filetype({

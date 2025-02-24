@@ -160,16 +160,16 @@ vim.keymap.set("v", "<leader>ff", telescope_find_files_visual_selected)
 
 wk.register({
 	["<leader>e"] = { "<cmd>Neotree toggle<cr>", "Toggle Explorer" },
-	["<leader>o"] = {
-		function()
-			if vim.bo.filetype == "neo-tree" then
-				vim.cmd.wincmd("p")
-			else
-				vim.cmd.Neotree("focus")
-			end
-		end,
-		"Toggle Explorer Focus",
-	},
+	-- ["<leader>o"] = {
+	-- 	function()
+	-- 		if vim.bo.filetype == "neo-tree" then
+	-- 			vim.cmd.wincmd("p")
+	-- 		else
+	-- 			vim.cmd.Neotree("focus")
+	-- 		end
+	-- 	end,
+	-- 	"Toggle Explorer Focus",
+	-- },
 })
 
 wk.register({
@@ -192,4 +192,23 @@ wk.register({
 wk.add({
 	{ "<leader>nd", "<cmd>NoiceDismiss<CR>", desc = "Dissmiss noice messages" },
 	{ "<leader>z",  "<cmd>ZenMode<CR>",      desc = "ZenMode" },
+})
+
+-- Obsidian
+
+local ob = require("obsidian")
+
+local obsidian_follow_link = function()
+	ob.util.gf_passthrough()
+end
+
+local obsidian_toggle_checkbox = function()
+	ob.util.toggle_checkbox()
+end
+
+wk.register({
+	["<leader>o"] = { name = "obsidian" },
+	["<leader>of"] = { "<cmd>ObsidianFollowLink<CR>", "Follow link" },
+	["<leader>od"] = { obsidian_toggle_checkbox, "Toggle checkbox", { buffer = true } },
+	["<leader>oc"] = { "<cmd>ObsidianNew<CR>", "Create note", { buffer = true } },
 })
