@@ -43,8 +43,17 @@ return {
 				note:add_alias(note.title)
 			end
 
+			local resources = false
+			for _, v in pairs(note.tags) do
+				if v == "resource" then
+					resources = true
+					break
+				end
+			end
 			local out = { id = note.id, aliases = note.aliases, tags = note.tags, area = "", project = "" }
-
+			if resources then
+				out = { id = note.id, aliases = note.aliases, tags = note.tags }
+			end
 			-- `note.metadata` contains any manually added fields in the frontmatter.
 			-- So here we just make sure those fields are kept in the frontmatter.
 			if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then

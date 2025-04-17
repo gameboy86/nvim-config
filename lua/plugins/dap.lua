@@ -8,8 +8,19 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 	config = function()
-		require("nvim-dap-virtual-text").setup()
-		require("dap-go").setup()
+		-- require("nvim-dap-virtual-text").setup()
+		require("dap-go").setup({
+			dap_configurations = {
+				{
+					type = "go",
+					name = "Attach to Delve",
+					mode = "remote",
+					request = "attach",
+					port = 2345,
+					host = "127.0.0.1"
+				},
+			}
+		})
 		local config = require("plugins/options/dap")
 		config.setup()
 		require("dapui").setup({

@@ -27,8 +27,9 @@ local wk = require("which-key")
 local tb = require("telescope.builtin")
 local gits = require("gitsigns")
 local utils = require("./utils")
+local neotestFn = require("./plugins/functions/neotest")
+local gitFn = require("./plugins/functions/git")
 local ssplit = require("smart-splits")
-local neotest = require("neotest")
 
 vim.keymap.set("n", "<leader>v", ":<C-u>vsplit<CR>", {})
 vim.keymap.set("n", "<leader><space>", ":noh<cr>", {})
@@ -41,36 +42,16 @@ wk.add({
 	{ "<C-Right>", ssplit.resize_right(), desc = "Resize split right" },
 })
 
-local neotest_tt = function()
-	neotest.run.run(vim.fn.expand("%"))
-end
-local neotest_tr = function()
-	neotest.run.run()
-end
-local neotest_tT = function()
-	neotest.run.run(vim.loop.cwd())
-end
-local neotest_ts = function()
-	neotest.summary.toggle()
-end
-local neotest_to = function()
-	neotest.output.open({ enter = true, auto_close = true })
-end
-local neotest_tO = function()
-	neotest.output_panel.toggle()
-end
-local neotest_tS = function()
-	neotest.run.stop()
-end
 
 wk.add({
-	{ "<leader>tt", neotest_tt, desc = "Run File" },
-	{ "<leader>tr", neotest_tr, desc = "Run Nearest" },
-	{ "<leader>tT", neotest_tT, desc = "Run Nearest" },
-	{ "<leader>ts", neotest_ts, desc = "Toggle Summary" },
-	{ "<leader>to", neotest_to, desc = "Show Output" },
-	{ "<leader>tO", neotest_tO, desc = "Toggle Output Panel" },
-	{ "<leader>tS", neotest_tS, desc = "Stop" },
+	{ "<leader>tt", neotestFn.RunFile,       desc = "Run File" },
+	{ "<leader>tr", neotestFn.RunNearest,    desc = "Run Nearest" },
+	{ "<leader>td", neotestFn.RunNearestDap, desc = "Run Nearest Dap" },
+	{ "<leader>tT", neotestFn.RunFolder,     desc = "Run Folder" },
+	{ "<leader>ts", neotestFn.ToggleSummary, desc = "Toggle Summary" },
+	{ "<leader>to", neotestFn.ShowOutput,    desc = "Show Output" },
+	{ "<leader>tO", neotestFn.ToggleOutput,  desc = "Toggle Output Panel" },
+	{ "<leader>tS", neotestFn.Stop,          desc = "Stop" },
 })
 
 wk.register({
@@ -91,26 +72,6 @@ wk.register({
 	["<leader>li"] = { tb.lsp_implementations, "Goto implementations" },
 	["<leader>ly"] = { tb.lsp_type_definitions, "List type definitions" },
 })
--- END LSP
-local git_branches = function()
-	tb.git_branches({ use_file_path = true })
-end
-
-local git_full_blame = function()
-	gits.blame_line({ full = true })
-end
-
-local git_commits = function()
-	tb.git_commits({ use_file_path = true })
-end
-
-local git_commits_current_file = function()
-	tb.git_bcommits({ use_file_path = true })
-end
-
-local git_status = function()
-	tb.git_status({ use_file_path = true })
-end
 
 wk.register({
 	["<leader>g"] = { name = "git" },
@@ -124,11 +85,11 @@ wk.register({
 	["<leader>gS"] = { gits.stage_buffer, "Stage Git buffer" },
 	["<leader>gu"] = { gits.undo_stage_hunk, "Unstage Git hunk" },
 	["<leader>gd"] = { gits.diffthis, "View Git diff" },
-	["<leader>gL"] = { git_full_blame, "View full Git blame" },
-	["<leader>gc"] = { git_commits, "View Git commits" },
-	["<leader>gC"] = { git_commits_current_file, "View current file Git commits" },
-	["<leader>ga"] = { git_status, "View Git status" },
-	["<leader>gb"] = { git_branches, "List Git branches" },
+	["<leader>gL"] = { gitFn.GitFullBlame, "View full Git blame" },
+	["<leader>gc"] = { gitFn.GitCommits, "View Git commits" },
+	["<leader>gC"] = { gitFn.GitCommitsCurrentFile, "View current file Git commits" },
+	["<leader>ga"] = { gitFn.GitStatus, "View Git status" },
+	["<leader>gb"] = { gitFn.GitBranches, "List Git branches" },
 })
 
 local telescope_live_grep_visual_selected = function()
@@ -160,21 +121,31 @@ vim.keymap.set("v", "<leader>ff", telescope_find_files_visual_selected)
 
 wk.register({
 	["<leader>e"] = { "<cmd>Neotree toggle<cr>", "Toggle Explorer" },
-	-- ["<leader>o"] = {
-	-- 	function()
-	-- 		if vim.bo.filetype == "neo-tree" then
-	-- 			vim.cmd.wincmd("p")
-	-- 		else
-	-- 			vim.cmd.Neotree("focus")
-	-- 		end
-	-- 	end,
-	-- 	"Toggle Explorer Focus",
-	-- },
 })
 
 wk.register({
 	["<leader>u"] = { name = "undo-tree" },
 	["<leader>uu"] = { "<cmd>lua require('undotree').toggle()<cr>", "Toggle undo-tree" },
+})
+
+wk.add({
+	{ "<leader>nd", "<cmd>NoiceDismiss<CR>", desc = "Dissmiss noice messages" },
+	{ "<leader>z",  "<cmd>ZenMode<CR>",      desc = "ZenMode" },
+})
+
+-- Obsidian
+
+local ob = require("obsidian")
+
+local obsidian_toggle_checkbox = function()
+	ob.util.toggle_checkbox()
+end
+
+wk.register({
+	["<leader>o"] = { name = "obsidian" },
+	["<leader>of"] = { "<cmd>ObsidianFollowLink<CR>", "Follow link" },
+	["<leader>od"] = { obsidian_toggle_checkbox, "Toggle checkbox", { buffer = true } },
+	["<leader>oc"] = { "<cmd>ObsidianNew<CR>", "Create note", { buffer = true } },
 })
 
 local dapui = require("dapui")
@@ -189,26 +160,60 @@ wk.register({
 	["<leader>de"] = { dapui.eval, "Eval" },
 })
 
-wk.add({
-	{ "<leader>nd", "<cmd>NoiceDismiss<CR>", desc = "Dissmiss noice messages" },
-	{ "<leader>z",  "<cmd>ZenMode<CR>",      desc = "ZenMode" },
-})
+local function run_debug_app()
+	local overseer = require("overseer")
+	local dap = require("dap")
 
--- Obsidian
-
-local ob = require("obsidian")
-
-local obsidian_follow_link = function()
-	ob.util.gf_passthrough()
+	overseer.run_template({ name = "Debug" }, function(task)
+		if not task then
+			vim.notify("No task 'Debug'", vim.log.levels.ERROR)
+			return
+		end
+	end)
+	vim.notify("Debug run", vim.log.levels.INFO)
+	overseer.toggle()
+	vim.defer_fn(function()
+		dap.run({
+			type = "go",
+			name = "Attach (dynamic)",
+			request = "attach",
+			mode = "remote",
+			host = "127.0.0.1",
+			port = 2345,
+		})
+	end, 1000)
 end
 
-local obsidian_toggle_checkbox = function()
-	ob.util.toggle_checkbox()
+local function run_app()
+	local overseer = require("overseer")
+
+	overseer.run_template({ name = "Run App" }, function(task)
+		if not task then
+			vim.notify("No task 'Run App'", vim.log.levels.ERROR)
+			return
+		end
+	end)
+	vim.notify("App run", vim.log.levels.INFO)
+	overseer.toggle()
 end
+
+local function run_tests()
+	local overseer = require("overseer")
+
+	overseer.run_template({ name = "Run Tests" }, function(task)
+		if not task then
+			vim.notify("No task 'Run Tests'", vim.log.levels.ERROR)
+			return
+		end
+	end)
+	vim.notify("Tests Run", vim.log.levels.INFO)
+end
+
 
 wk.register({
-	["<leader>o"] = { name = "obsidian" },
-	["<leader>of"] = { "<cmd>ObsidianFollowLink<CR>", "Follow link" },
-	["<leader>od"] = { obsidian_toggle_checkbox, "Toggle checkbox", { buffer = true } },
-	["<leader>oc"] = { "<cmd>ObsidianNew<CR>", "Create note", { buffer = true } },
+	["<leader>r"] = { name = "run" },
+	["<leader>ra"] = { run_app, "Run App" },
+	["<leader>rd"] = { run_debug_app, "Run Debuger App" },
+	["<leader>rt"] = { run_tests, "Run Tests" },
+	["<leader>rr"] = { ":OverseerToggle!<cr>", "Show" },
 })

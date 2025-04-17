@@ -16,7 +16,7 @@ return {
 						path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
 					},
 				},
-				lualine_x = { "encoding", "fileformat", "filetype" },
+				lualine_x = { "encoding", "fileformat", "filetype" , "overseer"},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},

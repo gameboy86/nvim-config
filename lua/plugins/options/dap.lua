@@ -15,22 +15,24 @@ function M.setup()
 			layouts = {
 				{
 					elements = {
-						{ id = "scopes", size = 0.25 },
-						"breakpoints",
-						"stacks",
+						-- { id = "scopes", size = 0.25 },
+						{ id = "breakpoints", size = 0.5 },
+						-- "stacks",
 						"watches",
 					},
-					size = 0.15,
-					position = "left",
+					size = 50,
+					position = "right",
 				},
-				{
-					elements = {
-						"repl",
-						"console",
-					},
-					size = 0.25,
-					position = "bottom",
-				},
+				-- {
+				-- 	elements = {
+				-- 		-- "repl",
+				-- 		-- "breakpoints",
+				-- 		-- "watches",
+				-- 		-- "console",
+				-- 	},
+				-- 	size = 0.25,
+				-- 	position = "bottom",
+				-- },
 			},
 			floating = {
 				max_height = nil,
