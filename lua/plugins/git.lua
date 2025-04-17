@@ -1,5 +1,10 @@
 return {
 	{
+		"tpope/vim-fugitive",
+		cmd = { "Git", "G" },
+		event = "VeryLazy",
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			local gits = require("gitsigns")
