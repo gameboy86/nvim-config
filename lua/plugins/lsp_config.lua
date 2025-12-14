@@ -1,16 +1,8 @@
-local handlers = {
-	["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-		local diagnostic = require("plugins/options/diagnostic")
-		diagnostic.MyDiagnosticConfig(ctx.bufnr)
-		vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-	end
-}
+local float_diag_grp = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = false })
 
 local setLSPClients = function(capa)
-	local lspconfig = require("lspconfig")
-	lspconfig.lua_ls.setup({
+	vim.lsp.config("lua_ls", {
 		capabilities = capa,
-		handlers = handlers,
 		settings = {
 			Lua = {
 				completion = {
@@ -19,33 +11,48 @@ local setLSPClients = function(capa)
 			},
 		},
 	})
-	lspconfig.gopls.setup({
+	vim.lsp.config("gopls", {
 		capabilities = capa,
-		handlers = handlers,
-		on_attach = function()
+		on_attach = function(_, bufnr)
+			vim.api.nvim_clear_autocmds({ group = float_diag_grp, buffer = bufnr })
 			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-				group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+				group = float_diag_grp,
+				buffer = bufnr,
 				callback = function()
 					vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
-				end
+				end,
 			})
-		end
+		end,
 	})
-	lspconfig.pyright.setup({
+	vim.lsp.config("pyright", {
 		capabilities = capa,
-		handlers = handlers,
+		on_attach = function(_, bufnr)
+			vim.api.nvim_clear_autocmds({ group = float_diag_grp, buffer = bufnr })
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				group = float_diag_grp,
+				buffer = bufnr,
+				callback = function()
+					vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+				end,
+			})
+		end,
 	})
-	lspconfig.jsonls.setup({
+	vim.lsp.config("jsonls", {
 		capabilities = capa,
-		provideFormatter = true,
-		handlers = handlers,
+		init_options = {
+			provideFormatter = true,
+		},
 	})
+	vim.lsp.enable({ "lua_ls", "gopls", "pyright", "jsonls" })
 end
 
 return {
 	{
-		"folke/neodev.nvim",
-		opts = {},
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = { plugins = { "neotest" }, types = true },
+		},
 	},
 	{
 		"williamboman/mason.nvim",
@@ -57,16 +64,13 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "pyright", "jsonls", "prosemd_lsp"},
+				ensure_installed = { "lua_ls", "gopls", "pyright", "jsonls" },
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("neodev").setup({
-				library = { plugins = { "neotest" }, types = true },
-			})
 			local capa = require("cmp_nvim_lsp").default_capabilities()
 			capa.offset_encoding = "utf-16"
 			capa.textDocument.foldingRange = {
