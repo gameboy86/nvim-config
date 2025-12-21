@@ -43,7 +43,10 @@ local setLSPClients = function(capa)
 			provideFormatter = true,
 		},
 	})
-	vim.lsp.enable({ "lua_ls", "gopls", "pyright", "jsonls" })
+	vim.lsp.enable("lua_ls")
+	vim.lsp.enable("gopls")
+	vim.lsp.enable("pyright")
+	vim.lsp.enable("jsonls")
 end
 
 return {
@@ -64,7 +67,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "pyright", "jsonls" },
+				ensure_installed = { "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls" },
 			})
 		end,
 	},
