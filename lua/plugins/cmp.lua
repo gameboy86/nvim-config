@@ -120,11 +120,11 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp",        priority = 1000 },
-					{ name = "luasnip",         priority = 750 },
-					{ name = "path",            priority = 500 },
+					{ name = "nvim_lsp", priority = 1000 },
+					{ name = "luasnip", priority = 750 },
+					{ name = "path", priority = 500 },
 					{ name = "render-markdown", priority = 400 },
-					{ name = "buffer",          priority = 200 },
+					{ name = "buffer", priority = 200 },
 				}),
 				sorting = {
 					comparators = {
