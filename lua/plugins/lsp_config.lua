@@ -53,9 +53,6 @@ return {
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
-		opts = {
-			library = { plugins = { "neotest" }, types = true },
-		},
 	},
 	{
 		"williamboman/mason.nvim",
