@@ -16,6 +16,7 @@ return {
 			yml = { "yamlfmt" }, -- czasem filetype bywa "yaml" tylko, ale możesz zostawić
 
 			xml = { "xmllint" },
+			lua = { "stylua" },
 		},
 	},
 }
