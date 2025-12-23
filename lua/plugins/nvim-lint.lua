@@ -1,18 +1,7 @@
 return {
 	"mfussenegger/nvim-lint",
-	event = { "BufWritePost" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		local lint = require("lint")
-
-		lint.linters_by_ft = {
-			go = { "golangcilint" },
-			python = { "ruff" },
-		}
-
-		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-			callback = function()
-				lint.try_lint()
-			end,
-		})
+		require("config.nvim_lint").setup()
 	end,
 }
