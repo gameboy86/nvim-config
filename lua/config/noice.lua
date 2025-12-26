@@ -22,7 +22,7 @@ function M.opts()
 			lsp_doc_border = true,
 		},
 		messages = { enabled = true, view = "notify" },
-		notify = { enabled = false },
+		notify = { enabled = true },
 		views = {
 			cmdline_popup = {
 				position = { row = "50%", col = "50%" },
@@ -41,27 +41,36 @@ function M.opts()
 				opts = { skip = true },
 			},
 			{
-				-- Hide generic "more line(s)" messages
 				filter = { event = "msg_show", kind = "", find = "more line" },
 				opts = { skip = true },
 			},
 			{
-				-- Hide "X lines, Y bytes"
 				filter = { event = "msg_show", find = "%d+L, %d+B" },
 				opts = { skip = true },
 			},
 			{
-				-- Hide "N more lines"
 				filter = { event = "msg_show", kind = "", find = "%d+ more lines?" },
 				opts = { skip = true },
 			},
 			{
-				-- Hide deprecation popups ("is deprecated") but keep in :messages
 				filter = { event = "msg_show", find = "is deprecated" },
 				opts = { skip = true },
 			},
 		},
 	}
+end
+
+function M.keymap()
+	local wk = require("which-key")
+
+	wk.add({
+		{ "<leader>n", group = "noice" },
+		{ "<leader>nn", "<cmd>Noice<cr>", desc = "Noice: UI" },
+		{ "<leader>nh", "<cmd>Noice history<cr>", desc = "Noice: history" },
+		{ "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "Noice: dismiss" },
+		{ "<leader>ne", "<cmd>Noice errors<cr>", desc = "Noice: errors" },
+		{ "<leader>nl", "<cmd>Noice last<cr>", desc = "Noice: last message" },
+	})
 end
 
 return M

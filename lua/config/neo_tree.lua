@@ -138,4 +138,11 @@ function M.setup()
 	require("neo-tree").setup(M.opts())
 end
 
+function M.keymap()
+	local wk = require("which-key")
+	wk.add({
+		{ "<leader>e", "<cmd>Neotree toggle<CR>", desc = "Toggle Explorer" },
+	})
+end
+
 return M

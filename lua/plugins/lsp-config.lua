@@ -20,7 +20,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("config.lsp").setup_servers()
+			require("config.lsp").setup()
+			require("config.lsp").keymap()
 		end,
 	},
 	{ "onsails/lspkind.nvim" },

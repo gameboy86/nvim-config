@@ -67,4 +67,20 @@ function M.opts()
 	}
 end
 
+function M.keymap()
+	local wk = require("which-key")
+
+	local function obsidian_toggle_checkbox()
+		local ob = require("obsidian")
+		ob.util.toggle_checkbox()
+	end
+
+	wk.add({
+		{ "<leader>o", group = "obsidian" },
+		{ "<leader>of", "<cmd>ObsidianFollowLink<CR>", desc = "Follow link" },
+		{ "<leader>oc", "<cmd>ObsidianNew<CR>", desc = "Create note" },
+		{ "<leader>od", obsidian_toggle_checkbox, desc = "Toggle checkbox" },
+	})
+end
+
 return M

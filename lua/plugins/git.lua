@@ -6,9 +6,11 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			local gits = require("gitsigns")
-			gits.setup()
+			local git = require("config.git")
+			git.setup()
+			git.keymap()
 		end,
 	},
 	{

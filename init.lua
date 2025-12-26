@@ -26,11 +26,5 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 				vim.notify("Delete error " .. file .. ": " .. err, vim.log.levels.WARN)
 			end
 		end
-		-- local overseer = require("overseer")
-		-- for _, task in ipairs(overseer.list_tasks()) do
-		--   if task:is_running() then
-		--     task:stop()
-		--   end
-		-- end
 	end,
 })

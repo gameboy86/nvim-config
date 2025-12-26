@@ -3,9 +3,9 @@ return {
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
-			file_types = { "markdown", "Avante" },
+			file_types = { "markdown" },
 		},
-		ft = { "markdown", "Avante" },
+		ft = { "markdown" },
 	},
 	{
 		"iamcco/markdown-preview.nvim",

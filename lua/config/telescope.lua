@@ -45,10 +45,30 @@ function M.setup()
 			["ui-select"] = themes.get_dropdown({}),
 		},
 	})
-
 	telescope.load_extension("ui-select")
-	pcall(telescope.load_extension, "git_signs")
 	pcall(telescope.load_extension, "noice")
+end
+
+function M.keymap()
+	local wk = require("which-key")
+	local tb = require("telescope.builtin")
+
+	wk.add({
+		{ "<leader>f", group = "telescope" },
+		{ "<leader>ff", tb.find_files, desc = "Find files" },
+		{ "<leader>fb", tb.buffers, desc = "List buffers" },
+		{ "<leader>fw", tb.live_grep, desc = "Live grep" },
+		{ "<leader>fo", tb.oldfiles, desc = "Find history" },
+		{ "<leader>ft", tb.help_tags, desc = "Find help" },
+		{
+			"<leader>fo",
+			function()
+				tb.oldfiles({ cwd_only = true })
+			end,
+			desc = "Recent files (project)",
+		},
+		{ "<leader>fr", tb.registers, desc = "List registers" },
+	})
 end
 
 return M

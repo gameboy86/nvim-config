@@ -61,4 +61,14 @@ function M.twilight_opts()
 	}
 end
 
+function M.keymap()
+	local wk = require("which-key")
+
+	wk.add({
+		{ "<leader>z", group = "folds_zen" },
+		{ "<leader>zz", "<cmd>ZenMode<CR>", desc = "ZenMode" },
+		{ "<leader>zt", "<cmd>Twilight<CR>", desc = "Toggle Twilight" },
+	})
+end
+
 return M

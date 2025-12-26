@@ -7,6 +7,9 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
+	init = function()
+		require("config.neo_tree").keymap()
+	end,
 	config = function()
 		require("config.neo_tree").setup()
 	end,

@@ -7,5 +7,6 @@ return {
 	},
 	config = function()
 		require("config.telescope").setup()
+		require("config.telescope").keymap()
 	end,
 }

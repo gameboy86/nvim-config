@@ -52,7 +52,7 @@ function M.capabilities()
 	return capa
 end
 
-function M.setup_servers()
+function M.setup()
 	local capa = M.capabilities()
 
 	-- Lua
@@ -111,6 +111,30 @@ function M.setup_servers()
 	for _, name in ipairs({ "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls" }) do
 		vim.lsp.enable(name)
 	end
+end
+
+function M.keymap()
+	local wk = require("which-key")
+	local tb = require("telescope.builtin")
+	wk.add({
+		{ "<leader>l", group = "lsp" },
+		{ "<leader>lk", vim.lsp.buf.hover, desc = "Hover symbol details" },
+		{ "<leader>la", vim.lsp.buf.code_action, desc = "LSP code action" },
+		{ "<leader>lf", vim.lsp.buf.format, desc = "Format code" },
+		{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename current symbol" },
+		{ "<leader>lh", vim.lsp.buf.signature_help, desc = "Signature help" },
+		{
+			"<leader>lD",
+			function()
+				vim.diagnostic.open_float()
+			end,
+			desc = "Hover diagnostics",
+		},
+		{ "<leader>ld", tb.lsp_definitions, desc = "Definition of current type" },
+		{ "<leader>lR", tb.lsp_references, desc = "List references" },
+		{ "<leader>li", tb.lsp_implementations, desc = "Goto implementations" },
+		{ "<leader>ly", tb.lsp_type_definitions, desc = "List type definitions" },
+	})
 end
 
 return M
