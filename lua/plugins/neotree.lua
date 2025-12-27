@@ -8,9 +8,9 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	init = function()
-		require("config.neo_tree").keymap()
+		require("config.neotree").keymap()
 	end,
 	config = function()
-		require("config.neo_tree").setup()
+		require("config.neotree").setup()
 	end,
 }

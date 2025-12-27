@@ -12,7 +12,7 @@ function M.opts()
 				{
 					"filename",
 					file_status = true,
-					path = 1, -- 0=filename, 1=relative, 2=absolute
+					path = 1,
 				},
 			},
 			lualine_x = { "encoding", "fileformat", "filetype" },

@@ -1,12 +1,6 @@
 local M = {}
 
 function M.setup()
-	require("config.dap.ui").setup()
-	require("config.dap.go").setup()
-	require("nvim-dap-virtual-text").setup()
-end
-
-function M.keymap()
 	local wk = require("which-key")
 
 	wk.add({

@@ -11,9 +11,8 @@ return {
 			},
 		},
 		config = function()
-			local dap = require("config.dap")
+			local dap = require("config.dap.init")
 			dap.setup()
-			dap.keymap()
 		end,
 	},
 }

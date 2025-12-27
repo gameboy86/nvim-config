@@ -8,9 +8,4 @@ function M.opts()
 	}
 end
 
-function M.init()
-	vim.o.timeout = true
-	vim.o.timeoutlen = 500
-end
-
 return M
