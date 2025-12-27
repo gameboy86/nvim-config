@@ -1,52 +1,36 @@
+-- config/neotest/keymaps.lua
+-- Keymaps for neotest. Uses lazy-friendly requires (require only inside callbacks).
+
 local M = {}
 
-function M.setup()
-	local neotest = require("neotest")
-
-	neotest.setup({
-		adapters = {
-			require("neotest-golang")({
-				dap_mode = "dap-go",
-				dap_go_opts = {},
-				runner = "gotestsum",
-				go_test_args = { "-v", "-race", "-count=1" },
-				env = { CGO_ENABLED = "1" },
-			}),
-
-			require("neotest-python")({
-				dap = { justMyCode = false },
-				runner = "pytest",
-				python = ".venv/bin/python",
-			}),
-		},
-	})
+local function nt()
+	return require("neotest")
 end
 
-function M.keymap()
+function M.setup()
 	local wk = require("which-key")
-	local neotest = require("neotest")
 
 	wk.add({
-		{ "<leader>t", group = "tasks + neotest" },
+		{ "<leader>t", group = "tests" },
 
 		{
 			"<leader>tt",
 			function()
-				neotest.run.run(vim.fn.expand("%"))
+				nt().run.run(vim.fn.expand("%"))
 			end,
 			desc = "Run File",
 		},
 		{
 			"<leader>tr",
 			function()
-				neotest.run.run()
+				nt().run.run()
 			end,
 			desc = "Run Nearest",
 		},
 		{
 			"<leader>tl",
 			function()
-				neotest.run.run_last()
+				nt().run.run_last()
 			end,
 			desc = "Run Last",
 		},
@@ -54,14 +38,14 @@ function M.keymap()
 		{
 			"<leader>td",
 			function()
-				neotest.run.run({ strategy = "dap" })
+				nt().run.run({ strategy = "dap" })
 			end,
 			desc = "Debug Nearest (DAP)",
 		},
 		{
 			"<leader>tD",
 			function()
-				neotest.run.run_last({ strategy = "dap" })
+				nt().run.run_last({ strategy = "dap" })
 			end,
 			desc = "Debug Last (DAP)",
 		},
@@ -70,7 +54,7 @@ function M.keymap()
 			"<leader>tT",
 			function()
 				local dir = vim.fn.expand("%:p:h")
-				neotest.run.run(dir)
+				nt().run.run(dir)
 			end,
 			desc = "Run Folder",
 		},
@@ -78,21 +62,21 @@ function M.keymap()
 		{
 			"<leader>ts",
 			function()
-				neotest.summary.toggle()
+				nt().summary.toggle()
 			end,
 			desc = "Toggle Summary",
 		},
 		{
 			"<leader>to",
 			function()
-				neotest.output.open({ enter = true })
+				nt().output.open({ enter = true })
 			end,
 			desc = "Show Output",
 		},
 		{
 			"<leader>tO",
 			function()
-				neotest.output_panel.toggle()
+				nt().output_panel.toggle()
 			end,
 			desc = "Toggle Output Panel",
 		},
@@ -100,7 +84,7 @@ function M.keymap()
 		{
 			"<leader>tS",
 			function()
-				neotest.run.stop()
+				nt().run.stop()
 			end,
 			desc = "Stop",
 		},
