@@ -1,13 +1,8 @@
 local M = {}
 
 function M.setup()
-	-- UI (signs/highlights)
 	require("config.dap.ui").setup()
-
-	-- Go adapter config
 	require("config.dap.go").setup()
-
-	-- virtual text
 	require("nvim-dap-virtual-text").setup()
 end
 
@@ -39,7 +34,6 @@ function M.keymap()
 			desc = "DAP hover toggle",
 		},
 
-		-- DAP VIEW (nvim-dap-view)
 		{ "<leader>dv", group = "view" },
 		{ "<leader>dvt", "<cmd>DapViewToggle<CR>", desc = "View toggle" },
 		{ "<leader>dvo", "<cmd>DapViewOpen<CR>", desc = "View open" },
