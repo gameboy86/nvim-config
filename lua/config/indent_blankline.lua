@@ -27,7 +27,7 @@ function M.setup()
 	require("ibl").setup({
 		scope = {
 			highlight = highlight,
-			show_end = true,
+			show_end = false,
 			show_start = false,
 		},
 	})

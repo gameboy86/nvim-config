@@ -19,16 +19,16 @@ function M.setup()
 		end,
 	})
 
-	vim.api.nvim_create_autocmd("ColorScheme", {
-		callback = function()
-			-- Force plain underlines for diagnostics after applying a colorscheme.
-			-- Some colorschemes (and tmux/terminal setups) render diagnostic underlines as "undercurl",
-			-- which may be unsupported or invisible. This ensures errors/warnings/etc. are always visible.
-			for _, s in ipairs({ "Error", "Warn", "Info", "Hint" }) do
-				vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. s, { underline = true })
-			end
-		end,
-	})
+	-- vim.api.nvim_create_autocmd("ColorScheme", {
+	-- 	callback = function()
+	-- 		-- Force plain underlines for diagnostics after applying a colorscheme.
+	-- 		-- Some colorschemes (and tmux/terminal setups) render diagnostic underlines as "undercurl",
+	-- 		-- which may be unsupported or invisible. This ensures errors/warnings/etc. are always visible.
+	-- 		for _, s in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+	-- 			vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. s, { underline = true })
+	-- 		end
+	-- 	end,
+	-- })
 
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		callback = function(args)
