@@ -28,7 +28,7 @@ function M.setup()
 		scope = {
 			highlight = highlight,
 			show_end = true,
-			show_start = true,
+			show_start = false,
 		},
 	})
 

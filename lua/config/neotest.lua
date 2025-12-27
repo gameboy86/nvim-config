@@ -9,6 +9,8 @@ function M.setup()
 				dap_mode = "dap-go",
 				dap_go_opts = {},
 				runner = "gotestsum",
+				go_test_args = { "-v", "-race", "-count=1" },
+				env = { CGO_ENABLED = "1" },
 			}),
 
 			require("neotest-python")({

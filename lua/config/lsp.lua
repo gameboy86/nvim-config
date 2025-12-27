@@ -62,6 +62,10 @@ function M.setup()
 		settings = {
 			Lua = {
 				completion = { callSnippet = "Replace" },
+				diagnostics = {
+					globals = { "vim" },
+					disable = { "different-requires" },
+				},
 			},
 		},
 	})
@@ -123,13 +127,6 @@ function M.keymap()
 		{ "<leader>lf", vim.lsp.buf.format, desc = "Format code" },
 		{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename current symbol" },
 		{ "<leader>lh", vim.lsp.buf.signature_help, desc = "Signature help" },
-		{
-			"<leader>lD",
-			function()
-				vim.diagnostic.open_float()
-			end,
-			desc = "Hover diagnostics",
-		},
 		{ "<leader>ld", tb.lsp_definitions, desc = "Definition of current type" },
 		{ "<leader>lR", tb.lsp_references, desc = "List references" },
 		{ "<leader>li", tb.lsp_implementations, desc = "Goto implementations" },
