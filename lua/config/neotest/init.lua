@@ -12,6 +12,9 @@ function M.setup()
 			require("config.neotest.adapters.golang").setup(),
 			require("config.neotest.adapters.python").setup(),
 		},
+		floating = {
+			border = "rounded",
+		},
 	})
 end
 

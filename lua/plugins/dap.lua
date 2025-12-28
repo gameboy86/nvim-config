@@ -7,7 +7,10 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 			{
 				"igorlfs/nvim-dap-view",
-				opts = { auto_toggle = true },
+				opts = {
+					auto_toggle = true,
+					help = { border = "rounded" },
+				},
 			},
 		},
 		config = function()

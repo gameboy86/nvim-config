@@ -21,6 +21,7 @@ function M.setup()
 		virtual_text = false,
 		update_in_insert = true,
 		severity_sort = true,
+		float = { border = "rounded" },
 		signs = {
 			text = {
 				[vim.diagnostic.severity.ERROR] = " ",

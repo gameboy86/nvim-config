@@ -22,7 +22,10 @@ function M.setup()
 				if vim.api.nvim_win_get_config(win).relative ~= "" then
 					vim.api.nvim_win_close(win, true)
 				else
-					require("dap.ui.widgets").hover()
+					require("dap.ui.widgets").hover(nil, {
+						border = "rounded",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+					})
 				end
 			end,
 			desc = "DAP hover toggle",
