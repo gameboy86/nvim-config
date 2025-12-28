@@ -19,7 +19,6 @@ function M.setup()
 				},
 				n = { q = actions.close },
 			},
-			file_ignore_patterns = { "node_modules", ".git", ".venv", "dist/" },
 		},
 		pickers = {
 			live_grep = {
