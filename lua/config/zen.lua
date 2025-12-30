@@ -65,7 +65,7 @@ function M.keymap()
 	local wk = require("which-key")
 
 	wk.add({
-		{ "<leader>z", group = "folds_zen" },
+		{ "<leader>z", group = "folds zen" },
 		{ "<leader>zz", "<cmd>ZenMode<CR>", desc = "ZenMode" },
 		{ "<leader>zt", "<cmd>Twilight<CR>", desc = "Toggle Twilight" },
 	})

@@ -1,7 +1,20 @@
 local M = {}
 
 function M.setup(overseer_opts)
-	require("overseer").setup(overseer_opts or {})
+	overseer_opts = overseer_opts or {}
+
+	overseer_opts.task_list = overseer_opts.task_list or {}
+	overseer_opts.task_list.keymaps = vim.tbl_extend("force", overseer_opts.task_list.keymaps or {}, {
+		-- zdejmij domyślne
+		["<C-j>"] = false,
+		["<C-k>"] = false,
+
+		-- nowe
+		["<C-S-j>"] = "keymap.scroll_output_down",
+		["<C-S-k>"] = "keymap.scroll_output_up",
+	})
+
+	require("overseer").setup(overseer_opts)
 
 	local telescope = require("telescope")
 	telescope.setup({

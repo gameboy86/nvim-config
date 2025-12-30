@@ -51,6 +51,7 @@ end
 function M.keymap()
 	local wk = require("which-key")
 	local tb = require("telescope.builtin")
+	local telescope_ui = require("config.messages.telescope")
 
 	wk.add({
 		{ "<leader>f", group = "telescope" },
@@ -67,6 +68,13 @@ function M.keymap()
 			desc = "Recent files (project)",
 		},
 		{ "<leader>fr", tb.registers, desc = "List registers" },
+		{
+			"<leader>fm",
+			function()
+				telescope_ui.open()
+			end,
+			desc = "Open :messages",
+		},
 	})
 end
 

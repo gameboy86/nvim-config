@@ -18,7 +18,6 @@ function M.opts()
 			},
 		},
 		provider_selector = function(_, filetype, buftype)
-			-- only use indent until a file is opened
 			if filetype == "" or buftype == "nofile" then
 				return "indent"
 			end
@@ -35,6 +34,28 @@ function M.opts()
 			end
 		end,
 	}
+end
+
+function M.keymap()
+	local wk = require("which-key")
+
+	wk.add({
+		{ "<leader>z", group = "fold zen" },
+		{
+			"<leader>zR",
+			function()
+				require("ufo").openAllFolds()
+			end,
+			desc = "Open all folds",
+		},
+		{
+			"<leader>zM",
+			function()
+				require("ufo").closeAllFolds()
+			end,
+			desc = "Close all folds",
+		},
+	})
 end
 
 return M

@@ -47,7 +47,6 @@ function M.setup()
 	end, { desc = "Resize split right" })
 
 	require("config.diagnostics").keymap()
-	require("config.fold").keymap()
 	require("config.messages").keymap()
 end
 
