@@ -28,7 +28,7 @@ function M.setup()
 	require("config.lsp.servers.lemminx").setup(capa, on_attach_default)
 	require("config.lsp.servers.helm_ls").setup(capa, on_attach_default)
 
-	for _, name in ipairs({ "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls" }) do
+	for _, name in ipairs({ "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls", "zls" }) do
 		vim.lsp.enable(name)
 	end
 end
