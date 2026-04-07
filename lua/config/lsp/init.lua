@@ -1,33 +1,28 @@
 local M = {}
 
 function M.setup()
-	do
-		local orig = vim.lsp.util.open_floating_preview
-		vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-			opts = opts or {}
-			opts.border = opts.border or "rounded"
-			return orig(contents, syntax, opts, ...)
-		end
+	-- Globalne ustawienie ramek dla wszystkich okien pływających LSP
+	local orig = vim.lsp.util.open_floating_preview
+	vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+		opts = opts or {}
+		opts.border = opts.border or "rounded"
+		return orig(contents, syntax, opts, ...)
 	end
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+	-- Linie z vim.lsp.with zostały usunięte, bo powyższa funkcja załatwia sprawę
 
 	local core = require("config.lsp.core")
 	local capa = core.capabilities()
-
 	local on_attach_default = core.make_on_attach()
 
-	require("config.lsp.servers.lua_ls").setup(capa, on_attach_default)
-	require("config.lsp.servers.gopls").setup(capa, on_attach_default)
-	require("config.lsp.servers.pyright").setup(capa, on_attach_default)
-	require("config.lsp.servers.jsonls").setup(capa, on_attach_default)
-	require("config.lsp.servers.yamlls").setup(capa, on_attach_default)
-	require("config.lsp.servers.lemminx").setup(capa, on_attach_default)
-	require("config.lsp.servers.helm_ls").setup(capa, on_attach_default)
+	-- Konfiguracja serwerów
+	local servers = { "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls" }
 
+	for _, name in ipairs(servers) do
+		require("config.lsp.servers." .. name).setup(capa, on_attach_default)
+	end
+
+	-- Dodatkowe włączenie (zls nie ma osobnego configu wyżej, więc zostaje w pętli)
 	for _, name in ipairs({ "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls", "zls" }) do
 		vim.lsp.enable(name)
 	end

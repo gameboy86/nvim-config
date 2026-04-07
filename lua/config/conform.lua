@@ -13,6 +13,7 @@ function M.opts()
 			yml = { "yamlfmt" },
 			xml = { "xmllint" },
 			lua = { "stylua" },
+			toml = { "taplo" },
 		},
 	}
 end

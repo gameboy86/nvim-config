@@ -16,7 +16,16 @@ function M.opts()
 	local fm = require("config.obsidian.frontmatter")
 
 	return {
-		ui = { enable = false },
+		ui = {
+			enable = false,
+			checkboxes = {
+				[" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+				["x"] = { char = "", hl_group = "ObsidianDone" },
+				[">"] = { char = "", hl_group = "ObsidianRightArrow" },
+				["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+				["!"] = { char = "", hl_group = "ObsidianImportant" },
+			},
+		},
 		completion = {
 			nvim_cmp = true,
 			min_chars = 2,
@@ -25,6 +34,10 @@ function M.opts()
 		new_notes_location = "notes_subdir",
 		prepend_note_id = true,
 		note_frontmatter_func = fm.note_frontmatter,
+		checkbox = {
+			order = { " ", "x" },
+			create_new = true,
+		},
 	}
 end
 

@@ -4,7 +4,23 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.config").setup({
-			ensure_installed = { "lua", "go", "bash", "json", "yaml", "zsh", "zig", "asm", "c", "python" },
+			ensure_installed = {
+				"lua",
+				"go",
+				"bash",
+				"json",
+				"yaml",
+				"zsh",
+				"zig",
+				"asm",
+				"c",
+				"python",
+				"gowork",
+				"gotmpl",
+			},
+			highlight = {
+				enable = true,
+			},
 		})
 	end,
 }
