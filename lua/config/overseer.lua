@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup(overseer_opts)
 	overseer_opts = overseer_opts or {}
+	local overseer = require("overseer")
 
 	overseer_opts.task_list = overseer_opts.task_list or {}
 	overseer_opts.task_list.keymaps = vim.tbl_extend("force", overseer_opts.task_list.keymaps or {}, {
@@ -14,7 +15,22 @@ function M.setup(overseer_opts)
 		["<C-S-k>"] = "keymap.scroll_output_up",
 	})
 
-	require("overseer").setup(overseer_opts)
+	overseer.register_template({
+		name = "Zig: test current file",
+		builder = function()
+			local file = vim.api.nvim_buf_get_name(0)
+			return {
+				cmd = "zig",
+				args = { "test", file },
+				cwd = vim.fn.getcwd(),
+			}
+		end,
+		condition = {
+			filetype = { "zig" },
+		},
+	})
+
+	overseer.setup(overseer_opts)
 
 	local telescope = require("telescope")
 	telescope.setup({

@@ -16,7 +16,7 @@ function M.setup()
 	local on_attach_default = core.make_on_attach()
 
 	-- Konfiguracja serwerów
-	local servers = { "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls" }
+	local servers = { "lua_ls", "gopls", "pyright", "jsonls", "yamlls", "lemminx", "helm_ls", "zig" }
 
 	for _, name in ipairs(servers) do
 		require("config.lsp.servers." .. name).setup(capa, on_attach_default)

@@ -6,14 +6,28 @@ local M = {}
 function M.setup()
 	require("config.neotest.ui").setup()
 	local neotest = require("neotest")
+	local adapters = {
+		require("config.neotest.adapters.golang").setup(),
+		require("config.neotest.adapters.python").setup(),
+		require("config.neotest.adapters.zig").setup(),
+	}
+
+	adapters = vim.tbl_filter(function(adapter)
+		return adapter ~= nil
+	end, adapters)
 
 	neotest.setup({
-		adapters = {
-			require("config.neotest.adapters.golang").setup(),
-			require("config.neotest.adapters.python").setup(),
-		},
+		adapters = adapters,
 		floating = {
 			border = "rounded",
+		},
+		watch = {
+			symbol_queries = {
+				zig = [[
+					; query
+					(identifier) @symbol
+				]],
+			},
 		},
 	})
 end

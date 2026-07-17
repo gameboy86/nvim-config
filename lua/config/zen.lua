@@ -57,7 +57,16 @@ function M.twilight_opts()
 			"table",
 			"if_statement",
 		},
-		exclude = {},
+		exclude = {
+			"neo-tree",
+			"neo-tree-popup",
+			"NvimTree",
+			"Trouble",
+			"trouble",
+			"qf",
+			"help",
+			"terminal",
+		},
 	}
 end
 

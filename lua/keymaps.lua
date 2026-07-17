@@ -48,6 +48,18 @@ function M.setup()
 
 	require("config.diagnostics").keymap()
 	require("config.messages").keymap()
+
+	local is_dark = true
+
+	vim.keymap.set("n", "<leader>nn", function()
+		if is_dark then
+			vim.cmd.colorscheme("catppuccin-latte")
+		else
+			vim.cmd.colorscheme("tokyonight-night")
+		end
+
+		is_dark = not is_dark
+	end, { desc = "Toggle theme" })
 end
 
 return M

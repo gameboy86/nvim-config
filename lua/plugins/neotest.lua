@@ -10,7 +10,7 @@ return {
 				"nvim-treesitter/nvim-treesitter",
 				branch = "main",
 				build = function()
-					vim.cmd(":TSUpdate go")
+					vim.cmd(":TSUpdate go zig")
 				end,
 			},
 
@@ -23,6 +23,7 @@ return {
 			},
 
 			"nvim-neotest/neotest-python",
+			"lawrence-laz/neotest-zig",
 		},
 
 		config = function()

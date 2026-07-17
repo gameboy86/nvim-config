@@ -9,6 +9,7 @@ local M = {}
 function M.workspaces()
 	return {
 		require("config.obsidian.workspaces.personal").workspace(),
+		require("config.obsidian.workspaces.tpo").workspace(),
 	}
 end
 
@@ -33,7 +34,7 @@ function M.opts()
 		workspaces = M.workspaces(),
 		new_notes_location = "notes_subdir",
 		prepend_note_id = true,
-		note_frontmatter_func = fm.note_frontmatter,
+		-- note_frontmatter_func = fm.note_frontmatter,
 		checkbox = {
 			order = { " ", "x" },
 			create_new = true,
